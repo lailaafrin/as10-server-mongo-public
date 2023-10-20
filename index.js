@@ -34,28 +34,36 @@ async function run() {
 
         // await client.connect();
 
+        
+        
         const brandCollection = client.db("brandDB").collection('brand');
+        const productCollection = client.db("assin10").collection('brand');
 
 
         app.get('/brand', async (req, res) => {
-            const cursor = brandCollection.find();
+            const cursor =productCollection.find();
             const result = await cursor.toArray();
             res.send(result);
         })
 
-        // updatet 
+
+        
+ // updatet 
         app.get('/brand/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
-            const result = await brandCollection.findOne(query)
+            const result = await productCollection.findOne(query)
             res.send(result);
         })
 
+      
+    
+       
 
-        app.post('/brand', async (req, res) => {
+     app.post('/brand', async (req, res) => {
             const newProduct = req.body;
             console.log(newProduct);
-            const result = await brandCollection.insertOne(newProduct);
+            const result = await productCollection.insertOne(newProduct);
             res.send(result);
         })
 
@@ -65,9 +73,7 @@ async function run() {
             const options = { upsert: true };
             const updateProduct = req.body;
 
-
-            
-            const product = {
+                 const product = {
                 $set: {
                     name: updateProduct.name,
                     price: updateProduct.price,
@@ -81,14 +87,14 @@ async function run() {
                 }
             }
 
-            const result = await brandCollection.updateOne(filter, product, options);
+            const result = await productCollection.updateOne(filter, product, options);
             res.send(result);
         })
 
         app.delete('/brand/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
-            const result = await brandCollection.deleteOne(query)
+            const result = await productCollection.deleteOne(query)
             res.send(result);
         })
         
