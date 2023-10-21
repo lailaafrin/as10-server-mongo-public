@@ -58,7 +58,10 @@ async function run() {
 
         app.get('data/:id', (req, res) => {
     
-})
+        })
+        app.put('/data', (req, res) => {
+            
+        })
     
      app.post('/brand', async (req, res) => {
             const newProduct = req.body;
