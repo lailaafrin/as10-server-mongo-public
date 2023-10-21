@@ -56,10 +56,10 @@ async function run() {
             res.send(result);
         })
 
-      
+        app.get('data/:id', (req, res) => {
     
-       
-
+})
+    
      app.post('/brand', async (req, res) => {
             const newProduct = req.body;
             console.log(newProduct);
@@ -73,7 +73,7 @@ async function run() {
             const options = { upsert: true };
             const updateProduct = req.body;
 
-                 const product = {
+            const product = {
                 $set: {
                     name: updateProduct.name,
                     price: updateProduct.price,
@@ -110,7 +110,6 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
     res.send('Brand-name is sever running')
 })
-
 
 app.listen(port, () => {
     console.log(`Brand server is runing on port:${ port }`)
